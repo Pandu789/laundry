@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami - FreshClean Laundry Malang</title>
+    <style>
+        /* --- Base & Variables --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f9fbff; color: #333; line-height: 1.6; }
+
+        :root {
+            --primary: #00a8cc;
+            --secondary: #142850;
+            --accent: #ffae00;
+            --white: #ffffff;
+            --grey: #f4f4f4;
+            --green-wa: #25d366;
+        }
+
+        /* --- Navbar --- */
+        header { background: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 99; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--secondary); font-weight: 500; }
+
+        /* --- Hero Section --- */
+        .contact-hero {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        .contact-hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .contact-hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+        /* --- Main Layout --- */
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr; /* Kiri: Form, Kanan: Info */
+            gap: 3rem;
+        }
+
+        /* --- Left Column: Form --- */
+        .contact-form-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
+        
+        .form-control {
+            width: 100%; padding: 12px;
+            border: 2px solid #eee; border-radius: 8px;
+            font-size: 1rem; transition: 0.3s;
+        }
+        .form-control:focus { border-color: var(--primary); outline: none; }
+        textarea.form-control { height: 150px; resize: vertical; }
+
+        .btn-submit {
+            background: var(--primary); color: white;
+            padding: 12px 30px; border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: bold; cursor: pointer;
+            transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-submit:hover { background: var(--secondary); transform: translateY(-2px); }
+
+        /* --- Right Column: Info Cards --- */
+        .info-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .info-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: 0.3s;
+        }
+        .info-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+
+        .icon-box {
+            background: #e0f7fa; color: var(--primary);
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-size: 1.2rem; flex-shrink: 0;
+        }
+
+        .info-content h3 { font-size: 1.1rem; color: var(--secondary); margin-bottom: 5px; }
+        .info-content p { color: #666; font-size: 0.95rem; line-height: 1.4; }
+        .info-link { color: var(--primary); text-decoration: none; font-weight: 600; margin-top: 5px; display: inline-block; }
+
+        /* --- FAQ Section --- */
+        .faq-section {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 20px;
+        }
+        .section-title { text-align: center; color: var(--secondary); margin-bottom: 2rem; }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        /* Native Accordion Style */
+        details { padding: 15px 20px; cursor: pointer; transition: 0.3s; }
+        details[open] { background: #f0fbff; }
+        
+        summary {
+            font-weight: 600; color: var(--secondary);
+            list-style: none; /* Hilangkan panah default */
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; } /* Chrome fix */
+        
+        summary::after { content: '+'; font-size: 1.2rem; color: var(--primary); }
+        details[open] summary::after { content: '-'; }
+
+        .faq-answer { margin-top: 10px; color: #555; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); }
+
+        /* Footer */
+        footer { background: #333; color: #aaa; padding: 2rem 5%; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .info-stack { flex-direction: row; flex-wrap: wrap; }
+            .info-card { flex: 1; min-width: 250px; }
+        }
+        /* --- NAVBAR STYLES --- */
+        .navbar {
+            background-color: var(--white);
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky; /* Agar menempel di atas */
+            top: 0;
+            z-index: 999;
+            transition: 0.3s;
+        }
+
+        /* LOGO */
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .navbar-logo span { color: var(--secondary); }
+
+        /* MENU UTAMA (DESKTOP) */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        /* Efek Hover Garis Bawah */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* TOMBOL CTA DI NAVBAR */
+        .nav-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background-color: var(--secondary); box-shadow: 0 5px 15px rgba(0, 168, 204, 0.3); }
+
+        /* HAMBURGER MENU (MOBILE TOGGLE) */
+        .hamburger {
+            display: none; /* Sembunyi di Desktop */
+            cursor: pointer;
+        }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--secondary);
+            transition: all 0.3s ease-in-out;
+            border-radius: 3px;
+        }
+
+        /* --- MOBILE RESPONSIVE (Max 768px) --- */
+        @media (max-width: 768px) {
+            .hamburger { display: block; } /* Munculkan Hamburger */
+
+            .nav-menu {
+                position: fixed;
+                left: -100%; /* Sembunyikan ke kiri */
+                top: 80px; /* Di bawah navbar */
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+                padding: 20px 0;
+                gap: 0;
+            }
+
+            .nav-menu.active { left: 0; /* Geser masuk saat aktif */ }
+
+            .nav-item { margin: 15px 0; width: 100%; }
+            
+            /* Tombol CTA di Mobile jadi full width tapi ada margin */
+            .nav-btn {
+                display: inline-block;
+                margin-top: 10px;
+                width: 80%; 
+            }
+
+            /* Animasi Hamburger jadi X */
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+
+  
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">
+            Fresh<span>Clean</span> ✨
+        </a>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">Beranda</a>
+            </li>
+            <li class="nav-item">
+                <a href="layanan.html" class="nav-link">Layanan</a>
+            </li>
+
+              <li class="nav-item">
+                <a href="blog.html" class="nav-link">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a href="lokasi.html" class="nav-link">Lokasi</a>
+            </li>
+          <li class="nav-item">
+                <a href="kontak.html" class="nav-link">Kontak</a>
+            </li>
+            <li class="nav-item">
+                <a href="pesan.html" class="nav-btn">Pesan </a>
+            </li>
+        </ul>
+
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        const navLink = document.querySelectorAll(".nav-link");
+
+        // Toggle Menu saat Hamburger diklik
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Tutup menu saat salah satu link diklik (UX yang baik)
+        navLink.forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+    </script>
+
+    <div class="contact-hero">
+        <h1>Hubungi Kami</h1>
+        <p>Punya saran, komplain, atau ingin menawarkan kerjasama bisnis? Kami siap mendengar Anda.</p>
+    </div>
+
+    <div class="container">
+        
+        <div class="contact-form-card">
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem;">Kirim Pesan</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" id="nama" class="form-control" placeholder="Nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nomor WhatsApp / Email</label>
+                    <input type="text" id="kontak" class="form-control" placeholder="Agar kami bisa membalas..." required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Perihal</label>
+                    <select id="subjek" class="form-control">
+                        <option value="Tanya Layanan">Pertanyaan Umum</option>
+                        <option value="Status Order">Cek Status Order</option>
+                        <option value="Komplain">Komplain / Masalah</option>
+                        <option value="Kerjasama">Kerjasama Bisnis (Partnership)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Pesan Anda</label>
+                    <textarea id="pesan" class="form-control" placeholder="Tuliskan detail pesan Anda di sini..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    Kirim ke WhatsApp Admin ✈️
+                </button>
+            </form>
+        </div>
+
+        <div class="info-stack">
+            
+            <div class="info-card">
+                <div class="icon-box">💬</div>
+                <div class="info-content">
+                    <h3>Chat WhatsApp</h3>
+                    <p>Respon cepat (07.00 - 20.00 WIB)</p>
+                    <a href="https://wa.me/628123456789" class="info-link">+62 812-3456-7890</a>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-box">✉️</div>
+                <div class="info-content">
+                    <h3>Email Bisnis</h3>
+                    <p>Untuk penawaran kerjasama B2B.</p>
+                    <a href="mailto:admin@freshclean.com" class="info-link">admin@freshclean.com</a>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-box">📍</div>
+                <div class="info-content">
+                    <h3>Outlet Pusat</h3>
+                    <p>Jl. Soekarno Hatta No. 10,<br>Lowokwaru, Malang</p>
+                    <a href="lokasi.html" class="info-link">Lihat di Peta →</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="faq-section">
+        <h2 class="section-title">Pertanyaan Sering Diajukan (FAQ)</h2>
+
+        <div class="faq-item">
+            <details>
+                <summary>Berapa lama proses pencucian selesai?</summary>
+                <div class="faq-answer">
+                    Untuk layanan Reguler memakan waktu 2-3 hari. Layanan Kilat (One Day) selesai dalam 24 jam, dan layanan Express bisa selesai dalam 6 jam.
+                </div>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>Apakah pakaian luntur akan dipisah?</summary>
+                <div class="faq-answer">
+                    Ya, tim kami selalu melakukan penyortiran (spotting) awal. Kami akan memisahkan pakaian putih, berwarna, dan bahan yang berpotensi luntur.
+                </div>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>Bagaimana jika ada pakaian yang hilang atau rusak?</summary>
+                <div class="faq-answer">
+                    Kami memberikan garansi ganti rugi maksimal 10x biaya cuci untuk item yang hilang atau rusak akibat kelalaian pihak laundry, sesuai syarat dan ketentuan di nota.
+                </div>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>Apakah deterjen yang digunakan aman untuk bayi?</summary>
+                <div class="faq-answer">
+                    Kami memiliki opsi layanan "Baby Care" yang menggunakan deterjen khusus hypoallergenic (anti-alergi) yang aman untuk kulit sensitif bayi.
+                </div>
+            </details>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2024 FreshClean Laundry. Malang, Indonesia.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ambil data
+            let nama = document.getElementById('nama').value;
+            let subjek = document.getElementById('subjek').value;
+            let pesan = document.getElementById('pesan').value;
+            
+            // Format Pesan WA
+            let textWA = `Halo Admin, saya *${nama}*.%0A%0A` +
+                         `📌 *Perihal:* ${subjek}%0A` +
+                         `📝 *Pesan:* ${pesan}`;
+            
+            // Redirect
+            window.open(`https://wa.me/628123456789?text=${textWA}`, '_blank');
+        });
+    </script>
+
+</body>
+</html>
