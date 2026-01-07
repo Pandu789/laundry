@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog & Tips Laundry - FreshClean Malang</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* --- Base & Variables (TIDAK ADA PERUBAHAN) --- */
+        /* --- Base & Variables --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #f9fbff; color: #333; line-height: 1.6; }
 
@@ -16,6 +17,10 @@
             --white: #ffffff;
             --grey: #f4f4f4;
             --text-light: #666;
+            --footer-bg: #0f172a;
+            --footer-text: #cbd5e1;
+            --footer-accent: #14b8a6;
+            --footer-border: #1e293b;
         }
 
         /* --- Navbar --- */
@@ -23,14 +28,49 @@
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; }
         .nav-links a { margin-left: 20px; text-decoration: none; color: var(--secondary); font-weight: 500; }
 
-        /* --- Hero --- */
+        /* --- Hero / Header Blog --- */
         .blog-header {
             background-color: var(--secondary);
             color: var(--white);
             padding: 4rem 5%;
             text-align: center;
+            position: relative;
         }
         .blog-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        /* --- MOBILE SEARCH BAR (BARU) --- */
+        .mobile-search-container {
+            display: none; /* Default sembunyi di Desktop */
+            margin-top: 25px;
+            max-width: 100%;
+        }
+        .mobile-search-form {
+            display: flex;
+            background: var(--white);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .mobile-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            color: #333;
+        }
+        .mobile-btn {
+            background: var(--accent);
+            color: var(--secondary);
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        .mobile-btn:hover { background: #e69c00; }
 
         /* --- Container --- */
         .container {
@@ -47,7 +87,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            align-content: start; /* Mencegah stretching saat item sedikit */
+            align-content: start;
             min-height: 400px;
         }
 
@@ -65,7 +105,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .blog-thumb { width: 100%; height: 200px; background-color: #ddd; object-fit: cover; cursor: pointer; } /* Added cursor pointer */
+        .blog-thumb { width: 100%; height: 200px; background-color: #ddd; object-fit: cover; cursor: pointer; }
         .blog-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
         .blog-meta { font-size: 0.8rem; color: #999; margin-bottom: 10px; display: flex; gap: 10px; }
         .blog-category { color: var(--primary); font-weight: bold; text-transform: uppercase; }
@@ -100,24 +140,49 @@
 
         /* --- Pagination --- */
         .pagination { display: flex; gap: 10px; justify-content: center; margin-top: 3rem; grid-column: 1 / -1; }
-        .page-btn {
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            text-decoration: none;
-            color: var(--secondary);
-            border-radius: 5px;
-            background: var(--white);
-            cursor: pointer;
-        }
+        .page-btn { padding: 10px 15px; border: 1px solid #ddd; text-decoration: none; color: var(--secondary); border-radius: 5px; background: var(--white); cursor: pointer; }
         .page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
         .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* Responsive */
+        /* --- Footer Styles --- */
+        .main-footer { background-color: var(--footer-bg); color: var(--footer-text); font-family: 'Segoe UI', sans-serif; margin-top: 5rem; border-top: 1px solid var(--footer-border); }
+        .footer-content { max-width: 1200px; margin: 0 auto; padding: 4rem 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .footer-logo { color: #fff; font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; }
+        .footer-logo span { color: var(--footer-accent); }
+        .footer-desc { font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: #94a3b8; }
+        .footer-social { display: flex; gap: 10px; }
+        .footer-social a { width: 40px; height: 40px; background: #1e293b; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; transition: 0.3s; }
+        .footer-social a:hover { background: var(--footer-accent); transform: translateY(-3px); }
+        .footer-heading { color: #fff; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 700; position: relative; display: inline-block; }
+        .footer-heading::after { content: ''; position: absolute; left: 0; bottom: -8px; width: 40px; height: 3px; background: var(--footer-accent); border-radius: 2px; }
+        .footer-links, .footer-contact { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--footer-text); text-decoration: none; font-size: 0.95rem; transition: 0.3s; display: flex; align-items: center; }
+        .footer-links a i { font-size: 0.7rem; margin-right: 10px; color: #475569; transition: 0.3s; }
+        .footer-links a:hover { color: var(--footer-accent); padding-left: 5px; }
+        .footer-links a:hover i { color: var(--footer-accent); }
+        .footer-contact li { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 0.95rem; }
+        .footer-contact i { color: var(--footer-accent); margin-right: 15px; margin-top: 5px; }
+        .footer-bottom { background: #020617; padding: 1.5rem 20px; border-top: 1px solid var(--footer-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: #64748b; }
+        .footer-legal { display: flex; align-items: center; gap: 15px; }
+        .footer-legal a { color: #64748b; text-decoration: none; transition: 0.3s; }
+        .footer-legal a:hover { color: #fff; }
+        .separator { width: 4px; height: 4px; background: #334155; border-radius: 50%; }
+
+        /* Responsive Styles */
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
             .sticky-widget { position: static; }
+            .footer-bottom { justify-content: center; }
+            .nav-links { display: none; } /* Hide menu desktop on mobile */
+            
+            /* TAMPILKAN SEARCH BAR MOBILE */
+            .mobile-search-container { display: block; } 
+            
+            /* Sidebar search disembunyikan agar tidak duplikat */
+            .sidebar-widget:first-child { display: none; } 
         }
-        /* --- NAVBAR STYLES --- */
+          /* --- NAVBAR STYLES --- */
         .navbar {
             background-color: var(--white);
             height: 80px;
@@ -236,75 +301,49 @@
             .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
+
     </style>
 </head>
 <body>
 
- 
     <nav class="navbar">
         <a href="#" class="navbar-logo">
             Fresh<span>Clean</span> ✨
         </a>
 
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="index.html" class="nav-link">Beranda</a>
-            </li>
-            <li class="nav-item">
-                <a href="layanan.html" class="nav-link">Layanan</a>
-            </li>
-
-              <li class="nav-item">
-                <a href="blog.html" class="nav-link">Blog</a>
-            </li>
-            <li class="nav-item">
-                <a href="lokasi.html" class="nav-link">Lokasi</a>
-            </li>
-          <li class="nav-item">
-                <a href="kontak.html" class="nav-link">Kontak</a>
-            </li>
-            <li class="nav-item">
-                <a href="pesan.html" class="nav-btn">Pesan </a>
-            </li>
+            <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
+            <li class="nav-item"><a href="layanan.html" class="nav-link">Layanan</a></li>
+            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="lokasi.html" class="nav-link">Lokasi</a></li>
+    
+            <li class="nav-item"><a href="pesan.html" class="nav-btn">Pesan Sekarang</a></li>
         </ul>
 
         <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </div>
     </nav>
-    <script>
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-menu");
-        const navLink = document.querySelectorAll(".nav-link");
-
-        // Toggle Menu saat Hamburger diklik
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
-
-        // Tutup menu saat salah satu link diklik (UX yang baik)
-        navLink.forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }));
-    </script>
 
     <div class="blog-header">
         <h1>Tips & Berita Laundry</h1>
         <p>Informasi seputar perawatan pakaian, tips noda, dan promo terbaru.</p>
+        
+        <div class="mobile-search-container">
+            <div class="mobile-search-form">
+                <input type="text" id="mobileSearchInput" class="mobile-input" placeholder="Cari artikel...">
+                <button class="mobile-btn" onclick="handleMobileSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="container">
         
         <main>
-            <div id="blog-grid" class="blog-grid">
-                </div>
-
-            <div id="pagination" class="pagination">
-                </div>
+            <div id="blog-grid" class="blog-grid"></div>
+            <div id="pagination" class="pagination"></div>
         </main>
 
         <aside>
@@ -338,113 +377,114 @@
 
     </div>
 
+    <footer class="main-footer">
+        <div class="footer-content">
+            
+            <div class="footer-col">
+                <h2 class="footer-logo">Fresh<span>Clean</span></h2>
+                <p class="footer-desc">
+                    Jasa laundry premium di Malang dengan teknologi setrika uap. Pakaian bersih, wangi, dan rapi dalam waktu 24 jam.
+                </p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Layanan Kami</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Laundry Kiloan Malang</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cuci Sepatu & Tas</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Dry Clean Jas</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cuci Karpet</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Antar Jemput Gratis</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Akses Cepat</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="layanan.html">Daftar Harga</a></li>
+                    <li><a href="blog.html">Blog Tips</a></li>
+                    <li><a href="kontak.html">Hubungi Kami</a></li>
+                    <li><a href="#">Cek Status Order</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Outlet Pusat</h3>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jl. Soekarno Hatta No. 10,<br>Lowokwaru, Kota Malang 65141</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+62 812-3456-7890</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>admin@freshclean.com</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>07.00 - 20.00 WIB</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 FreshClean Laundry. All Rights Reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <span class="separator"></span>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // 1. Data Dummy (Database Simulasi)
+        // Data Dummy
         const blogData = [
-            {
-                id: 1,
-                title: "Cara Menjemur Pakaian Agar Tidak Bau Apek Saat Musim Hujan",
-                category: "Tips",
-                date: "12 Nov 2025",
-                excerpt: "Musim hujan sering membuat cucian susah kering. Simak 5 tips ampuh mengatasinya.",
-                image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=500&q=60"
-            },
-            {
-                id: 2,
-                title: "Kenapa Sepatu Putih Menguning Setelah Dicuci? Ini Alasannya!",
-                category: "Layanan",
-                date: "10 Nov 2025",
-                excerpt: "Jangan asal sikat! Proses pengeringan yang salah bisa merusak sepatu canvas.",
-                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=60"
-            },
-            {
-                id: 3,
-                title: "Mengenal Simbol Label Perawatan pada Pakaian Mahal",
-                category: "Edukasi",
-                date: "05 Nov 2025",
-                excerpt: "Arti simbol segitiga, lingkaran, dan setrika pada label baju Anda agar tidak salah cuci.",
-                image: "https://images.unsplash.com/photo-1567113463300-102a7eb3cb26?auto=format&fit=crop&w=500&q=60"
-            },
-            {
-                id: 4,
-                title: "Promo Diskon 20% Khusus Member Baru Bulan Ini",
-                category: "Promo",
-                date: "01 Nov 2025",
-                excerpt: "Kabar gembira! Dapatkan potongan harga spesial untuk laundry bedcover dan boneka.",
-                image: "https://images.unsplash.com/photo-1556740758-90de63f2076e?auto=format&fit=crop&w=500&q=60"
-            },
-            {
-                id: 5,
-                title: "Tips Menghilangkan Noda Kopi di Baju Putih",
-                category: "Tips",
-                date: "28 Okt 2025",
-                excerpt: "Baju putih kena kopi? Jangan panik, gunakan bahan dapur ini untuk membersihkannya.",
-                image: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=500&q=60"
-            },
-            {
-                id: 6,
-                title: "Perbedaan Dry Clean vs Laundry Kiloan Biasa",
-                category: "Layanan",
-                date: "25 Okt 2025",
-                excerpt: "Kapan harus pakai Dry Clean? Ketahui bedanya agar pakaian formal Anda awet.",
-                image: "https://images.unsplash.com/photo-1489274495757-95c7c83700c0?auto=format&fit=crop&w=500&q=60"
-            },
-            {
-                id: 7,
-                title: "Cara Mencuci Boneka Besar Agar Tidak Kempes",
-                category: "Tips",
-                date: "20 Okt 2025",
-                excerpt: "Boneka kesayangan kotor? Ini teknik mencuci yang aman tanpa merusak isian dakron.",
-                image: "https://images.unsplash.com/photo-1559454403-b8fb87521bc7?auto=format&fit=crop&w=500&q=60"
-            },
-            {
-                id: 8,
-                title: "Cara Melipat Baju Metode Konmari agar Hemat Tempat",
-                category: "Tips",
-                date: "15 Okt 2025",
-                excerpt: "Lemari penuh sesak? Coba metode lipat ala Jepang ini agar lebih rapi.",
-                image: "https://images.unsplash.com/photo-1624385397441-2678c1a6007e?auto=format&fit=crop&w=500&q=60"
-            }
+            { id: 1, title: "Cara Menjemur Pakaian Agar Tidak Bau Apek Saat Musim Hujan", category: "Tips", date: "12 Nov 2025", excerpt: "Musim hujan sering membuat cucian susah kering. Simak 5 tips ampuh mengatasinya.", image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=500&q=60" },
+            { id: 2, title: "Kenapa Sepatu Putih Menguning Setelah Dicuci? Ini Alasannya!", category: "Layanan", date: "10 Nov 2025", excerpt: "Jangan asal sikat! Proses pengeringan yang salah bisa merusak sepatu canvas.", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=60" },
+            { id: 3, title: "Mengenal Simbol Label Perawatan pada Pakaian Mahal", category: "Edukasi", date: "05 Nov 2025", excerpt: "Arti simbol segitiga, lingkaran, dan setrika pada label baju Anda agar tidak salah cuci.", image: "https://images.unsplash.com/photo-1567113463300-102a7eb3cb26?auto=format&fit=crop&w=500&q=60" },
+            { id: 4, title: "Promo Diskon 20% Khusus Member Baru Bulan Ini", category: "Promo", date: "01 Nov 2025", excerpt: "Kabar gembira! Dapatkan potongan harga spesial untuk laundry bedcover dan boneka.", image: "https://images.unsplash.com/photo-1556740758-90de63f2076e?auto=format&fit=crop&w=500&q=60" },
+            { id: 5, title: "Tips Menghilangkan Noda Kopi di Baju Putih", category: "Tips", date: "28 Okt 2025", excerpt: "Baju putih kena kopi? Jangan panik, gunakan bahan dapur ini untuk membersihkannya.", image: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=500&q=60" },
+            { id: 6, title: "Perbedaan Dry Clean vs Laundry Kiloan Biasa", category: "Layanan", date: "25 Okt 2025", excerpt: "Kapan harus pakai Dry Clean? Ketahui bedanya agar pakaian formal Anda awet.", image: "https://images.unsplash.com/photo-1489274495757-95c7c83700c0?auto=format&fit=crop&w=500&q=60" }
         ];
 
-        // 2. State Management
-        let currentState = {
-            query: "",
-            category: "All",
-            page: 1,
-            rows: 4 // Jumlah artikel per halaman
-        };
+        let currentState = { query: "", category: "All", page: 1, rows: 4 };
 
-        // 3. Fungsi Utama: Render Artikel
         function renderArticles() {
             const grid = document.getElementById('blog-grid');
             const pagination = document.getElementById('pagination');
             
-            // Filter Data
             let filteredData = blogData.filter(item => {
                 let catMatch = (currentState.category === "All") ? true : item.category === currentState.category;
                 let searchMatch = item.title.toLowerCase().includes(currentState.query.toLowerCase());
                 return catMatch && searchMatch;
             });
 
-            // Pagination Logic
             const totalItems = filteredData.length;
             const totalPages = Math.ceil(totalItems / currentState.rows);
             const start = (currentState.page - 1) * currentState.rows;
             const end = start + currentState.rows;
             const paginatedItems = filteredData.slice(start, end);
 
-            // Render ke HTML
             grid.innerHTML = "";
             
             if (paginatedItems.length === 0) {
                 grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#888;">Tidak ada artikel yang ditemukan.</p>`;
             } else {
                 paginatedItems.forEach(post => {
-                    // PERUBAHAN DISINI: href="#" diganti menjadi href="blog-detail.html"
                     grid.innerHTML += `
                         <article class="blog-card">
-                            <a href="blogdetail.html">
+                            <a href="blog-detail.html">
                                 <img src="${post.image}" alt="${post.title}" class="blog-thumb">
                             </a>
                             <div class="blog-content">
@@ -452,24 +492,20 @@
                                     <span class="blog-category">${post.category}</span>
                                     <span>• ${post.date}</span>
                                 </div>
-                                <h2 class="blog-title"><a href="blogdetail.html">${post.title}</a></h2>
+                                <h2 class="blog-title"><a href="blog-detail.html">${post.title}</a></h2>
                                 <p class="blog-excerpt">${post.excerpt}</p>
-                                <a href="blogdetail.html" class="read-more">Baca Selengkapnya →</a>
+                                <a href="blog-detail.html" class="read-more">Baca Selengkapnya →</a>
                             </div>
                         </article>
                     `;
                 });
             }
-
-            // Render Pagination Buttons
             renderPagination(totalPages);
         }
 
-        // 4. Fungsi Render Tombol Pagination
         function renderPagination(totalPages) {
             const paginationDiv = document.getElementById('pagination');
             paginationDiv.innerHTML = "";
-
             if (totalPages <= 1) return;
 
             let prevDisabled = (currentState.page === 1) ? "disabled" : "";
@@ -484,30 +520,38 @@
             paginationDiv.innerHTML += `<button class="page-btn" ${nextDisabled} onclick="changePage(${currentState.page + 1})">Next ›</button>`;
         }
 
-        // 5. Event Handlers
         function filterCategory(catName) {
-            currentState.category = catName;
-            currentState.page = 1;
-            currentState.query = "";
-            
+            currentState.category = catName; currentState.page = 1; currentState.query = "";
             const links = document.querySelectorAll('.cat-list a');
             links.forEach(link => link.classList.remove('active'));
             event.target.closest('a').classList.add('active');
-
             renderArticles();
         }
 
+        // Search Handler (DESKTOP)
         function handleSearch() {
-            const query = document.getElementById('searchInput').value;
-            currentState.query = query;
+            currentState.query = document.getElementById('searchInput').value;
             currentState.page = 1;
             renderArticles();
         }
 
+        // Search Handler (MOBILE) - Fungsi Baru
+        function handleMobileSearch() {
+            currentState.query = document.getElementById('mobileSearchInput').value;
+            currentState.page = 1;
+            renderArticles();
+            // Scroll sedikit ke bawah agar user langsung lihat hasil
+            document.getElementById('blog-grid').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Event Listener untuk Enter Key
         document.getElementById('searchInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                handleSearch();
-            }
+            if (e.key === 'Enter') handleSearch();
+        });
+        
+        // Event Listener untuk Enter Key (Mobile)
+        document.getElementById('mobileSearchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') handleMobileSearch();
         });
 
         function changePage(pageNum) {
@@ -516,10 +560,23 @@
             document.querySelector('.blog-header').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Init First Load
         renderArticles();
-
     </script>
 
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        navLinks.forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+    </script>
 </body>
 </html>
