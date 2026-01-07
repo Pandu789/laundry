@@ -365,6 +365,46 @@
             .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
+         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f9fbff; color: #333; line-height: 1.6; }
+
+        :root {
+            --primary: #00a8cc;
+            --secondary: #142850;
+            --accent: #ffae00;
+            --white: #ffffff;
+            --grey: #f4f4f4;
+            --text-light: #666;
+            --footer-bg: #0f172a;
+            --footer-text: #cbd5e1;
+            --footer-accent: #14b8a6;
+            --footer-border: #1e293b;
+        }
+
+         .main-footer { background-color: var(--footer-bg); color: var(--footer-text); font-family: 'Segoe UI', sans-serif; margin-top: 5rem; border-top: 1px solid var(--footer-border); }
+        .footer-content { max-width: 1200px; margin: 0 auto; padding: 4rem 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .footer-logo { color: #fff; font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; }
+        .footer-logo span { color: var(--footer-accent); }
+        .footer-desc { font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: #94a3b8; }
+        .footer-social { display: flex; gap: 10px; }
+        .footer-social a { width: 40px; height: 40px; background: #1e293b; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; transition: 0.3s; }
+        .footer-social a:hover { background: var(--footer-accent); transform: translateY(-3px); }
+        .footer-heading { color: #fff; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 700; position: relative; display: inline-block; }
+        .footer-heading::after { content: ''; position: absolute; left: 0; bottom: -8px; width: 40px; height: 3px; background: var(--footer-accent); border-radius: 2px; }
+        .footer-links, .footer-contact { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--footer-text); text-decoration: none; font-size: 0.95rem; transition: 0.3s; display: flex; align-items: center; }
+        .footer-links a i { font-size: 0.7rem; margin-right: 10px; color: #475569; transition: 0.3s; }
+        .footer-links a:hover { color: var(--footer-accent); padding-left: 5px; }
+        .footer-links a:hover i { color: var(--footer-accent); }
+        .footer-contact li { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 0.95rem; }
+        .footer-contact i { color: var(--footer-accent); margin-right: 15px; margin-top: 5px; }
+        .footer-bottom { background: #020617; padding: 1.5rem 20px; border-top: 1px solid var(--footer-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: #64748b; }
+        .footer-legal { display: flex; align-items: center; gap: 15px; }
+        .footer-legal a { color: #64748b; text-decoration: none; transition: 0.3s; }
+        .footer-legal a:hover { color: #fff; }
+        .separator { width: 4px; height: 4px; background: #334155; border-radius: 50%; }
+
 
     </style>
 </head>
@@ -550,9 +590,46 @@
 
     </div>
 
-    <footer>
-        <p>&copy; 2024 FreshClean Laundry. Malang, Indonesia.<br>
-        <small>Harga dapat berubah sewaktu-waktu tanpa pemberitahuan.</small></p>
+    
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h2 class="footer-logo">Fresh<span>Clean</span></h2>
+                <p class="footer-desc">Jasa laundry premium di Malang dengan teknologi setrika uap. Pakaian bersih, wangi, dan rapi dalam waktu 24 jam.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Layanan Kami</h3>
+                  <ul class="footer-links">
+                    <li><a href="pesan.html"><i class="fas fa-chevron-right"></i> Laundry Kiloan Malang</a></li>
+                    <li><a href="pesan.html"><i class="fas fa-chevron-right"></i> Cuci Sepatu & Tas</a></li>
+                    <li><a href="pesan.html"><i class="fas fa-chevron-right"></i> Dry Clean Jas</a></li>
+                    <li><a href="pesan.html"><i class="fas fa-chevron-right"></i> Cuci Karpet</a></li>
+                    <li><a href="pesan.html"><i class="fas fa-chevron-right"></i> Antar Jemput Gratis</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Outlet Pusat</h3>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Jl. Soekarno Hatta No. 10,<br>Lowokwaru, Kota Malang 65141</span></li>
+                    <li><i class="fas fa-phone-alt"></i><span>+62 812-3456-7890</span></li>
+                    <li><i class="fas fa-envelope"></i><span>admin@freshclean.com</span></li>
+                    <li><i class="fas fa-clock"></i><span>07.00 - 20.00 WIB</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 FreshClean Laundry. All Rights Reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <span class="separator"></span>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
     </footer>
 
 </body>
