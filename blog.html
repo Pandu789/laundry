@@ -3,8 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Blog & Tips Laundry - FreshClean Malang</title>
+    <meta name="description" content="Temukan tips mencuci, merawat pakaian, dan info promo terbaru dari FreshClean Laundry Malang. Solusi cerdas untuk pakaian bersih dan awet.">
+    <meta name="keywords" content="blog laundry, tips mencuci baju, cara menghilangkan noda, laundry malang, freshclean promo">
+    <meta name="author" content="FreshClean Laundry">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://freshclean.com/blog.html">
+
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Blog & Tips Laundry - FreshClean Malang">
+    <meta property="og:description" content="Kumpulan artikel tips merawat pakaian dan info promo laundry di Malang.">
+    <meta property="og:image" content="https://freshclean.com/asset/og-blog.jpg">
+    <meta property="og:url" content="https://freshclean.com/blog.html">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="asset/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="asset/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="asset/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://freshclean.com/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://freshclean.com/blog.html"
+      }]
+    }
+    </script>
+
     <style>
         /* --- Base & Variables --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
@@ -212,7 +249,7 @@
             align-items: center;
             padding: 0 5%;
             box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            position: sticky; /* Agar menempel di atas */
+            position: sticky;
             top: 0;
             z-index: 999;
             transition: 0.3s;
@@ -324,9 +361,12 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-[#F8FAFC] text-slate-800">
 
-<nav class="navbar">
+    <div id="overlay" class="overlay"></div>
+
+     
+    <nav class="navbar">
         <a href="index.html" class="navbar-logo">
             Fresh<span>Clean</span> ✨
         </a>
@@ -345,7 +385,7 @@
             <li class="nav-item">
                 <a href="lokasi.html" class="nav-link">Lokasi</a>
             </li>
-      
+        
             <li class="nav-item">
                 <a href="pesan.html" class="nav-btn">Pesan </a>
             </li>
@@ -381,8 +421,8 @@
         
         <div class="mobile-search-container">
             <div class="mobile-search-form">
-                <input type="text" id="mobileSearchInput" class="mobile-input" placeholder="Cari artikel...">
-                <button class="mobile-btn" onclick="handleMobileSearch()">
+                <input type="text" id="mobileSearchInput" class="mobile-input" placeholder="Cari artikel..." aria-label="Cari artikel mobile">
+                <button class="mobile-btn" onclick="handleMobileSearch()" aria-label="Tombol cari mobile">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -400,8 +440,8 @@
             <div class="sidebar-widget">
                 <h3 class="widget-title">Cari Artikel</h3>
                 <div class="search-form">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Ketik kata kunci...">
-                    <button class="search-btn" onclick="handleSearch()">🔍</button>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Ketik kata kunci..." aria-label="Cari artikel desktop">
+                    <button class="search-btn" onclick="handleSearch()" aria-label="Tombol cari desktop">🔍</button>
                 </div>
             </div>
 
@@ -436,9 +476,9 @@
                     Jasa laundry premium di Malang dengan teknologi setrika uap. Pakaian bersih, wangi, dan rapi dalam waktu 24 jam.
                 </p>
                 <div class="footer-social">
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
 
@@ -488,7 +528,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 FreshClean Laundry. All Rights Reserved.</p>
+            <p>© 2026 FreshClean Laundry. All Rights Reserved.</p>
             <div class="footer-legal">
                 <a href="#">Privacy Policy</a>
                 <span class="separator"></span>
@@ -498,17 +538,18 @@
     </footer>
 
     <div class="floating-widget">
-        <button onclick="scrollToTop()" id="btnBackToTop" title="Kembali ke Atas">
+        <button onclick="scrollToTop()" id="btnBackToTop" title="Kembali ke Atas" aria-label="Kembali ke atas">
             <i class="fas fa-arrow-up"></i>
         </button>
 
-        <a href="https://wa.me/6281234567890?text=Halo%20FreshClean,%20saya%20mau%20tanya%20laundry..." target="_blank" class="btn-wa" title="Chat via WhatsApp">
+        <a href="https://wa.me/6281234567890?text=Halo%20FreshClean,%20saya%20mau%20tanya%20laundry..." target="_blank" class="btn-wa" title="Chat via WhatsApp" aria-label="Chat WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
 
     <script>
         // --- Data & Logic Blog ---
+        // Image lazy loading diterapkan pada string gambar di bawah
         const blogData = [
             { id: 1, title: "Cara Menjemur Pakaian Agar Tidak Bau Apek Saat Musim Hujan", category: "Tips", date: "12 Nov 2025", excerpt: "Musim hujan sering membuat cucian susah kering. Simak 5 tips ampuh mengatasinya.", image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=500&q=60" },
             { id: 2, title: "Kenapa Sepatu Putih Menguning Setelah Dicuci? Ini Alasannya!", category: "Layanan", date: "10 Nov 2025", excerpt: "Jangan asal sikat! Proses pengeringan yang salah bisa merusak sepatu canvas.", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=60" },
@@ -544,17 +585,17 @@
                 paginatedItems.forEach(post => {
                     grid.innerHTML += `
                         <article class="blog-card">
-                            <a href="blogdetail.html">
-                                <img src="${post.image}" alt="${post.title}" class="blog-thumb">
+                            <a href="blog-detail.html">
+                                <img src="${post.image}" alt="${post.title}" class="blog-thumb" loading="lazy" width="500" height="200">
                             </a>
                             <div class="blog-content">
                                 <div class="blog-meta">
                                     <span class="blog-category">${post.category}</span>
                                     <span>• ${post.date}</span>
                                 </div>
-                                <h2 class="blog-title"><a href="blogdetail.html">${post.title}</a></h2>
+                                <h2 class="blog-title"><a href="blog-detail.html">${post.title}</a></h2>
                                 <p class="blog-excerpt">${post.excerpt}</p>
-                                <a href="blogdetail.html" class="read-more">Baca Selengkapnya →</a>
+                                <a href="blog-detail.html" class="read-more">Baca Selengkapnya →</a>
                             </div>
                         </article>
                     `;
@@ -569,15 +610,15 @@
             if (totalPages <= 1) return;
 
             let prevDisabled = (currentState.page === 1) ? "disabled" : "";
-            paginationDiv.innerHTML += `<button class="page-btn" ${prevDisabled} onclick="changePage(${currentState.page - 1})">‹ Prev</button>`;
+            paginationDiv.innerHTML += `<button class="page-btn" ${prevDisabled} onclick="changePage(${currentState.page - 1})" aria-label="Previous Page">‹ Prev</button>`;
 
             for (let i = 1; i <= totalPages; i++) {
                 let activeClass = (currentState.page === i) ? "active" : "";
-                paginationDiv.innerHTML += `<button class="page-btn ${activeClass}" onclick="changePage(${i})">${i}</button>`;
+                paginationDiv.innerHTML += `<button class="page-btn ${activeClass}" onclick="changePage(${i})" aria-label="Page ${i}">${i}</button>`;
             }
 
             let nextDisabled = (currentState.page === totalPages) ? "disabled" : "";
-            paginationDiv.innerHTML += `<button class="page-btn" ${nextDisabled} onclick="changePage(${currentState.page + 1})">Next ›</button>`;
+            paginationDiv.innerHTML += `<button class="page-btn" ${nextDisabled} onclick="changePage(${currentState.page + 1})" aria-label="Next Page">Next ›</button>`;
         }
 
         function filterCategory(catName) {
